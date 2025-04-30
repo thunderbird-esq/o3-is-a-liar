@@ -1,0 +1,6 @@
+@import './system.css';       /* local copy of system.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-macbg text-black font-chicago; }
