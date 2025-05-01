@@ -1,13 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>THUNDERBIRD.ESQ System‑6</title>
-  <link rel="stylesheet" href="/src/styles/base.css" />
+  <meta charset="UTF-8">
+  <title>THUNDERBIRD BBS</title>
+  <meta name="GENERATOR" content="THUNDERBIRD BBS (C) 1989">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.ts"></script>
+  <!-- Boot Screen -->
+  <div id="boot-screen" class="boot-screen">
+    <div style="position: relative; display: inline-block;">
+      <img id="boot-icon" class="boot-icon" src="assets/images/eye-icon.svg" alt="THUNDERBIRD OS Icon">
+      <div class="boot-icon-label">
+        <span class="question-mark">?</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boot Dialog -->
+  <div id="boot-dialog" class="boot-dialog">
+    <div class="title-bar">
+      <button aria-label="Close" class="close"></button>
+      <h1 class="title">THUNDERBIRD OS Boot</h1>
+      <button aria-label="Resize" class="resize"></button>
+    </div>
+    <pre class="boot-text" id="bootText"></pre>
+    <div class="progress-section" id="progressSection" style="display: none;">
+      <pre id="progressHeader">THUNDERBIRD OS v1.0.0 Booting...</pre>
+      <pre id="progressBar"></pre>
+      <pre id="status">Initializing...</pre>
+    </div>
+  </div>
+
+  <!-- Desktop Container -->
+  <div id="desktop-container" class="desktop-container">
+    <!-- Desktop Menu Bar -->
+    <div class="desktop-menu">
+      <ul role="menu-bar">
+        <li role="menu-item" tabindex="0" aria-haspopup="true">
+          <img src="assets/images/favicon.ico" alt="THUNDERBIRD Icon" class="menu-icon">
+          <ul role="menu">
+            <li role="menu-item"><a href="#about" style="text-decoration:none; color:inherit;">About THUNDERBIRD BBS</a></li>
+            <li role="menu-item" class="divider"></li>
+            <li role="menu-item"><a href="#prefs" style="text-decoration:none; color:inherit;">Preferences</a></li>
+          </ul>
+        </li>
+        <li role="menu-item" tabindex="0" aria-haspopup="true">
+          File
+          <ul role="menu">
+            <li role="menu-item"><a href="#open" style="text-decoration:none; color:inherit;">Open</a></li>
+            <li role="menu-item"><a href="#close" style="text-decoration:none; color:inherit;">Close</a></li>
+            <li role="menu-item" class="divider"></li>
+            <li role="menu-item"><a href="#quit" style="text-decoration:none; color:inherit;">Quit</a></li>
+          </ul>
+        </li>
+        <li role="menu-item" tabindex="0" aria-haspopup="true">
+          Edit
+          <ul role="menu">
+            <li role="menu-item"><a href="#copy" style="text-decoration:none; color:inherit;">Copy</a></li>
+            <li role="menu-item"><a href="#paste" style="text-decoration:none; color:inherit;">Paste</a></li>
+          </ul>
+        </li>
+        <li role="menu-item" tabindex="0" aria-haspopup="true" style="margin-left:auto;">
+          Special
+          <ul role="menu" style="right:0;">
+            <li role="menu-item"><a href="#settings" style="text-decoration:none; color:inherit;">Settings</a></li>
+            <li role="menu-item"><a href="#about" style="text-decoration:none; color:inherit;">About</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Desktop Icons -->
+    <div class="desktop">
+      <div class="desktop-icon" data-target="bbs-window">
+        <img src="core/icon/bbs-icon.svg" alt="THUNDERBIRD BBS Icon">
+        <span>THUNDERBIRD BBS</span>
+      </div>
+    </div>
+
+    <!-- Modem Sequence Window -->
+    <div id="modem-sequence" class="modal-dialog" style="top: 20%; left: 50%; transform: translateX(-50%);">
+      <div class="title-bar">
+        <button aria-label="Close" class="close"></button>
+        <h1 class="title">Connecting...</h1>
+        <button aria-label="Resize" class="resize"></button>
+      </div>
+      <div class="window-pane" id="modem-text"></div>
+    </div>
+
+    <!-- BBS Interface Window -->
+    <div id="bbs-window" class="window" style="top: 10%; left: 50%; transform: translateX(-50%); display: none;">
+      <div class="title-bar">
+        <button aria-label="Close" class="close" onclick="this.closest('.window').style.display='none';"></button>
+        <h1 class="title">THUNDERBIRD BBS</h1>
+        <button aria-label="Resize" class="resize"></button>
+      </div>
+      <div class="separator"></div>
+
+      <ul role="menu-bar">
+        <li role="menu-item" tabindex="0" aria-haspopup="true">
+          File
+          <ul role="menu">
+            <li role="menu-item"><a href="#login" style="text-decoration:none; color:inherit;">Login</a></li>
+            <li role="menu-item"><a href="#register" style="text-decoration:none; color:inherit;">Register</a></li>
+            <li role="menu-item" class="divider"></li>
+            <li role="menu-item"><a href="#exit" style="text-decoration:none; color:inherit;">Exit</a></li>
+          </ul>
+        </li>
+        <li role="menu-item" tabindex="0" aria-haspopup="true">
+          Messages
+          <ul role="menu">
+            <li role="menu-item"><a href="#new" style="text-decoration:none; color:inherit;">New Post</a></li>
+            <li role="menu-item"><a href="#inbox" style="text-decoration:none; color:inherit;">Inbox</a></li>
+          </ul>
+        </li>
+        <li role="menu-item" tabindex="0" aria-haspopup="true" style="margin-left:auto;">
+          Special
+          <ul role="menu" style="right:0;">
+            <li role="menu-item"><a href="#settings" style="text-decoration:none; color:inherit;">Settings</a></li>
+            <li role="menu-item"><a href="#about" style="text-decoration:none; color:inherit;">About</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="window-pane message-area" id="message-display">
+        <!-- Banner will be inserted here by JavaScript -->
+      </div>
+
+      <div class="separator"></div>
+      <div class="chat-input-section">
+        <input id="bbs-command" type="text" placeholder="Type your message...">
+        <button class="btn btn-default">SEND</button>
+      </div>
+    </div>
+  </div>
+
+<!-- Audio -->
+<audio id="systemChirp" src="assets/audio/system-chirp.mp3" loop></audio>
+<audio id="fanSound1" src="assets/audio/fan-hum.mp3"></audio>
+<audio id="fanSound2" src="assets/audio/fan-hum-2.mp3"></audio>
+<audio id="clicksSound" src="assets/audio/floppy-clicks.mp3"></audio>
+<audio id="bootBeep" src="assets/audio/startup-beep.mp3"></audio>
+<audio id="startupSound" src="assets/audio/boot-chime.mp3" preload="auto"></audio>
+
+<!-- Draggabilly -->
+<script src="core/ui/draggabilly.pkgd.min.js"></script>
+<!-- Main Script -->
+<script src="script.js"></script>
 </body>
 </html>

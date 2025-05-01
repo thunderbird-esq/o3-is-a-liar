@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>THUNDERBIRD BBS</title>
+  <link rel="stylesheet" href="system6_facsimile.css">
+</head>
+<body>
+  <div id="modem-sequence" class="window">
+    <div class="window-title">Connecting...</div>
+    <div class="window-pane" id="modem-text"></div>
+  </div>
+
+  <div id="bbs-interface" class="window hidden">
+    <div class="window-title draggable">
+      <button aria-label="Close" class="btn close"></button>
+      THUNDERBIRD BBS
+      <button aria-label="Resize" class="btn resize"></button>
+    </div>
+
+    <ul role="menu-bar">
+      <li role="menu-item">File
+        <ul role="menu">
+          <li><a href="#login">Login</a></li>
+          <li><a href="#register">Register</a></li>
+          <li class="divider"></li>
+          <li><a href="#exit">Exit</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="window-pane message-area" id="message-display"></div>
+
+    <div class="window-pane">
+      <div class="field-row">
+        <label for="bbs-command">COMMAND:</label>
+        <input id="bbs-command" type="text" placeholder="Type HELP">
+      </div>
+      <div class="field-row" style="justify-content: flex-end;">
+        <button class="btn clear">CLEAR</button>
+        <button class="btn btn-default send">SEND</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/system6-ui.js"></script>
+</body>
+</html>

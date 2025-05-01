@@ -1,0 +1,129 @@
+
+/* Apple System 6 CSS Facsimile - Comprehensive Style Sheet */
+
+/* Font declarations */
+@font-face {
+    font-family: 'ChicagoFLF';
+    src: url('fonts/ChicagoFLF.ttf');
+}
+
+@font-face {
+    font-family: 'Geneva';
+    src: url('fonts/Geneva.ttf');
+}
+
+@font-face {
+    font-family: 'Monaco';
+    src: url('fonts/Monaco.ttf');
+}
+
+/* General Styles */
+body {
+    font-family: 'Geneva', sans-serif;
+    font-size: 12px;
+    color: #000000;
+    background: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    image-rendering: pixelated;
+}
+
+/* Window styles */
+.window {
+    border: 2px solid #000000;
+    background: #FFFFFF;
+    box-shadow: 4px 4px 0 #777777;
+    position: absolute;
+    padding: 8px;
+}
+
+.window-title {
+    background: #BBBBBB;
+    font-family: 'ChicagoFLF', sans-serif;
+    padding: 4px;
+    cursor: move;
+}
+
+/* Icons */
+.icon-32, .icon-16 {
+    image-rendering: pixelated;
+}
+
+/* Menu bar */
+.menu-bar {
+    background: #FFFFFF;
+    border-bottom: 1px solid #000000;
+    font-family: 'ChicagoFLF', sans-serif;
+    padding: 4px;
+    display: flex;
+}
+
+.menu-item {
+    padding: 4px 8px;
+    cursor: default;
+}
+
+.menu-item:hover {
+    background: #0000CC;
+    color: #FFFFFF;
+}
+
+/* Dialog Styles */
+.modal-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px double #000000;
+    background: #FFFFFF;
+    padding: 16px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-dialog img {
+    margin-bottom: 8px;
+}
+
+.modal-dialog span {
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.modal-dialog button {
+    font-family: 'Geneva', sans-serif;
+    padding: 4px 8px;
+    margin: 2px;
+}
+
+button.btn-default {
+    background-color: #BBBBBB;
+    border: 1px solid #000000;
+}
+
+/* Selection style */
+::selection {
+    background: #0000CC;
+    color: #FFFFFF;
+}
+
+/* Scrollbars (optional for webkit browsers) */
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #BBBBBB;
+    border: 2px solid #000000;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none;
+}
