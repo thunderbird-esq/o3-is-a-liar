@@ -1,0 +1,24 @@
+name: static-deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read          # allow checkout
+  pages: write            # allow publish
+  id-token: write         # required by deploy-pages
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # ⬇️  Bundle the repo *exactly as-is* (no build) into a Pages artifact
+      - uses: actions/upload-pages-artifact@v2
+        with:
+          path: .           # root of repo
+
+      - uses: actions/deploy-pages@v2   # pushes artifact to gh-pages
+
