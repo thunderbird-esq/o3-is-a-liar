@@ -5,20 +5,29 @@ on:
     branches: [main]
 
 permissions:
-  contents: read          # allow checkout
-  pages: write            # allow publish
-  id-token: write         # required by deploy-pages
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      # ⬇️  Bundle the repo *exactly as-is* (no build) into a Pages artifact
-      - uses: actions/upload-pages-artifact@v2
+      # 💡 package the repo AS-IS; no build step
+      - uses: actions/upload-pages-artifact@v3   # ← upgrade (v3 → v4 artifact inside)
         with:
-          path: .           # root of repo
+          path: .                                # publish everything from project root
 
-      - uses: actions/deploy-pages@v2   # pushes artifact to gh-pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4            # ← upgrade
 
